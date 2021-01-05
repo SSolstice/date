@@ -5,10 +5,11 @@
 int main ()
 {
 	char const ch = '*';
-	int i,j,t = 0,n = 0,a[N];
-	float sum = 0,avg,mdn,mode;
+	int i,j,t = 0,n = 0,a[N],max;
+	float sum = 0,avg,mdn;
 	int const grd[] = {1,2,3,4,5,6,7,8,9,10};
 	
+	printf("Please enter the counts: ");
 	for(i = 0;i < TEN;i++){
 		scanf("%d",&a[i]);
 	}
@@ -27,7 +28,7 @@ int main ()
 	for(i = 0;i < TEN;i++)/*求中位数*/{
 		n += a[i];
 		if(n == 20){
-		    mdn = grd[i]*grd[i+1]/2;
+		    mdn = (float)(grd[i]+grd[i+1])/2;
 			break;
 		}
 		else if(n >= 21){
@@ -35,16 +36,17 @@ int main ()
 			break;
 		}
 	} 
-	for(i = 0;i < TEN;i++){
-		for(j = 0;j < TEN;j++){
-			if(a[i] > a[j])
-				t = i;
-			else 
-			    t = j;
-		}
+	printf("\nAverage: %.2f\tMedian: %.2f\tMode: ",avg,mdn);
+	max = a[0];
+	for(i = 1;i < TEN;i++){
+		if(a[i] > max)
+		max = a[i];
 	}
-	mode = grd[t];
-	printf("\nAverage: %.2f\tMedian: %.2f\tMode: %.0f\n",avg,mdn,mode);
+	for(i = 0;i < TEN;i++){
+		if(a[i] == max)
+		printf("%d  ",grd[i]);
+	}
+	printf("\n"); 
 	
 	return 0;
 }
